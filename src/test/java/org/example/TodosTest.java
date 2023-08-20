@@ -47,11 +47,8 @@ public class TodosTest {
         todos.add(meeting);
 
         Task[] tasks = todos.search("задач");
-        Assertions.assertEquals(tasks.length, 3);
-
-        int[] expectedIds = {5, 55, 555};
-        int[] actualIds = {tasks[0].getId(), tasks[1].getId(), tasks[2].getId()};
-        Assertions.assertArrayEquals(expectedIds, actualIds);
+        Task[] expected = {simpleTask, epic, meeting};
+        Assertions.assertArrayEquals(expected, tasks);
     }
 
     @Test
@@ -72,7 +69,8 @@ public class TodosTest {
         todos.add(meeting);
 
         Task[] tasks = todos.search("Строка, которой нет в задачах");
-        Assertions.assertEquals(tasks.length, 0);
+        Task[] expected = {};
+        Assertions.assertArrayEquals(expected, tasks);
     }
 
     @Test
@@ -93,7 +91,7 @@ public class TodosTest {
         todos.add(meeting);
 
         Task[] tasks = todos.search("Подзадача 3");
-        Assertions.assertEquals(tasks.length, 1);
-        Assertions.assertEquals(tasks[0].getId(), 55);
+        Task[] expected = {epic};
+        Assertions.assertArrayEquals(expected, tasks);
     }
 }
